@@ -4,23 +4,26 @@
 
 
 $(function () { 
-
-var saveBtn = $('#save-btn');
+var saveBtn = $(".saveBtn");
 saveBtn.on('click' ,  function (event) {
   event.preventDefault();
-  var EventInput = $("#msg-input").val(); //Grabbing the value that the user inputs in an event textarea so we can save it in localstorage
-  console.log ("EVENT: " + EventInput);
-  localStorage.setItem("Event", EventInput);
+  var value = $(this).siblings('.description').val(); // grabbing value of the element with class of description that is a sibling of the clicked saveBtn
+  var time = $(this).parent().attr('id'); //get ID of the parent element of the clicked saveBtn
 
+  console.log ("EVENT: " + value);
+  console.log (time);
+  localStorage.setItem(time, value); //save to localstorage with time as key and value as value 
 
 })
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
+var currentHour = dayjs().format('H');
+console.log (currentHour);
+
+var displayDate = dayjs().format('MMM, D, YYYY');
+console.log (displayDate);
+
+
+
+
   // TODO: Add code to apply the past, present, or future class to each time
   // block by comparing the id to the current hour. HINTS: How can the id
   // attribute of each time-block be used to conditionally add or remove the
